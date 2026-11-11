@@ -1,0 +1,51 @@
+﻿<Page x:Class="AirlineTickets.PageReg"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AirlineTickets"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageReg">
+
+    <Grid HorizontalAlignment="Center">
+        <Grid.Background>
+            <ImageBrush ImageSource="/av.jpg"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Регистрация" FontSize="22" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
+        <TextBox x:Name="txtname" HorizontalAlignment="Left" Margin="102,13,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Background="Black" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="70" Foreground="Black" FontSize="18" FontWeight="Bold" FontFamily="Wide Latin"><Run Language="ru-ru" Text="И"/><Run Text="мя"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="113" Text="Фамилия" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,79,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="98" Text="Отчество" FontSize="18" FontWeight="Bold"/>
+        <TextBox x:Name="txtsurn" HorizontalAlignment="Left" Margin="102,52,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Background="Black" Foreground="White"/>
+        <TextBox x:Name="txtpatr" HorizontalAlignment="Left" Margin="102,87,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Background="Black" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,113,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="7,151,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Почта" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="7,183,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Телефон" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,220,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,252,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Повторите пароль" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="89"/>
+        <TextBox x:Name="txtemail" HorizontalAlignment="Left" Margin="102,157,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="Black" Foreground="#FFFBFAFA"/>
+        <TextBox x:Name="txtlog" HorizontalAlignment="Left" Margin="102,119,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FF0A0A0A" Foreground="#FFEFEFEF"/>
+        <TextBox x:Name="txtphon" HorizontalAlignment="Left" Margin="102,189,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
+        <PasswordBox x:Name="passw" HorizontalAlignment="Left" Margin="102,226,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
+        <PasswordBox x:Name="passwcheck" HorizontalAlignment="Left" Margin="102,263,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
+        <Button x:Name="btnreg" Content="Зарегистрироваться" HorizontalAlignment="Center" Margin="0,327,0,0" Grid.Row="8" VerticalAlignment="Top" Height="28" Width="227"  Background="Black" Foreground="White" Click="btnreg_Click"/>
+
+
+
+    </Grid>
+</Page>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c77f20b0ef294c8aacc28cbfa869a291" Name="Diagram1">
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Aircrafts" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Airlines" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Airports" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.BookingItems" Width="1.5" PointX="7.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Bookings" Width="1.5" PointX="5.25" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.City" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Country" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Flights" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.FlightSeats" Width="1.5" PointX="10.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.FlightTypes" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Passengers" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Payments" Width="1.5" PointX="7.5" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Roles" Width="1.5" PointX="0.75" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.SeatClasses" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.StatusId" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Tickets" Width="1.5" PointX="5.25" PointY="23.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AirlineTicketOfModel.Users" Width="1.5" PointX="3" PointY="21.25" IsExpanded="true" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Flights_Aircrafts" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Airlines_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Flights_Airlines" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Airports_City" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Airports_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Flights_ArrivalAirport" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Flights_DepartureAirport" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_BookingItems_Bookings" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_BookingItems_Flights" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_BookingItems_FlightSeats" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_BookingItems_Tickets" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Bookings_Passengers" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Bookings_StatusId" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Bookings_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Payments_Bookings" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Flights_FlightTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_FlightSeats_Flights" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_FlightSeats_SeatClasses" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="AirlineTicketOfModel.FK_Tickets_SeatClasses" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,31 @@
+﻿<Window x:Class="AirlineTickets.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AirlineTickets"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="Aqua"
+              Padding="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+
+                <TextBlock Grid.Column="1" Text="Авиабилеты"
+                         FontSize="22" FontWeight="Bold"
+                         VerticalAlignment="Center" Margin="15,0,0,0"/>
+                <TextBlock x:Name="fio" Grid.Column="2"
+                         VerticalAlignment="Center" FontSize="14"/>
+            </Grid>
+        </Border>
+
+        <Frame x:Name="Framemain" NavigationUIVisibility="Hidden"/>
+    </DockPanel>
+    
+</Window>
