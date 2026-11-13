@@ -24,9 +24,9 @@ namespace AirlineTickets
         public MainWindow()
         {
             InitializeComponent();
-            AppConnect.model01 = new AirlineTicketOfEntities();
+            AppConnect.model01 = new AirlineTicketOfEntities2();
             AppFrame.Framemain = Framemain;
-            Framemain.Navigate(new PageReg());
+            Framemain.Navigate(new PagAuth());
         }
 
     

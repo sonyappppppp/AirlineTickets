@@ -1,0 +1,164 @@
+﻿<Page x:Class="AirlineTickets.PageTicket"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:AirlineTickets"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="PageTicket">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Каталог рейсов" FontSize="22" FontWeight="Bold"
+                   Foreground="#1565C0" Margin="0,0,0,12"/>
+
+        <StackPanel x:Name="filterPanel" Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,15">
+            <ComboBox x:Name="cmbSort" Width="220" Margin="0,0,10,0" SelectionChanged="Filters_Changed">
+                <ComboBoxItem Content="По цене (возрастание)" IsSelected="True"/>
+                <ComboBoxItem Content="По цене (убывание)"/>
+                <ComboBoxItem Content="По времени вылета (ранние)"/>
+                <ComboBoxItem Content="По времени вылета (поздние)"/>
+                <ComboBoxItem Content="По длительности"/>
+            </ComboBox>
+
+            <ComboBox x:Name="cmbFilter" Width="180" Margin="0,0,10,0" SelectionChanged="Filters_Changed">
+                <ComboBoxItem Content="Все рейсы" IsSelected="True"/>
+                <ComboBoxItem Content="Только прямые"/>
+                <ComboBoxItem Content="С пересадкой"/>
+                <ComboBoxItem Content="Чартер"/>
+            </ComboBox>
+
+            <TextBox x:Name="txtSearch" Width="280" TextChanged="Filters_Changed"
+                     ToolTip="Поиск по городу, авиакомпании или номеру рейса"/>
+        </StackPanel>
+
+        <ListView x:Name="listFlights" Grid.Row="2" BorderThickness="0"
+                
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="0,0,0,10" BorderThickness="1" CornerRadius="8" Padding="15">
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderBrush" Value="#1976D2"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsExpensive}" Value="True">
+                                        <Setter Property="Background" Value="#FFF8E1"/>
+                                        <Setter Property="BorderBrush" Value="#F9A825"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
+
+                        <Grid>
+                            <!-- ⬇️ ДОБАВЛЕНА 4-я КОЛОНКА (Width="140") ДЛЯ КНОПОК УПРАВЛЕНИЯ ⬇️ -->
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="140"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Колонка 0: Логотип -->
+                            <Border Grid.Column="0" Background="#1976D2" CornerRadius="4"
+                                    Width="70" Height="70" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding AirlineIATA}" Foreground="White" FontSize="18" FontWeight="Bold"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                            <!-- Колонка 1: Информация о рейсе -->
+                            <StackPanel Grid.Column="1" Margin="15,0" VerticalAlignment="Center">
+                                <TextBlock FontSize="16" FontWeight="Bold" Foreground="#333">
+                                    <Run Text="{Binding AirlineName}"/>
+                                    <Run Text=" • "/>
+                                    <Run Text="{Binding FlightNumber}"/>
+                                </TextBlock>
+                                <TextBlock FontSize="14" Margin="0,8,0,0" Foreground="#555">
+                                    <Run Text="{Binding DepartureCity}" FontWeight="SemiBold"/>
+                                    <Run Text=" ("/>
+                                    <Run Text="{Binding DepartureIATA}"/>
+                                    <Run Text=") "/>
+                                    <Run Text="{Binding DepartureTime, StringFormat={}{0:HH:mm}}"/>
+                                    <Run Text=" ✈ "/>
+                                    <Run Text="{Binding ArrivalCity}" FontWeight="SemiBold"/>
+                                    <Run Text=" ("/>
+                                    <Run Text="{Binding ArrivalIATA}"/>
+                                    <Run Text=") "/>
+                                    <Run Text="{Binding ArrivalTime, StringFormat={}{0:HH:mm}}"/>
+                                </TextBlock>
+                                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                    <TextBlock FontSize="12" Foreground="#666">
+                                        <Run Text="В пути: "/>
+                                        <Run Text="{Binding DurationText}"/>
+                                    </TextBlock>
+                                    <TextBlock Text=" • " FontSize="12" Foreground="#666"/>
+                                    <TextBlock FontSize="12" Foreground="#666" Text="{Binding FlightType}"/>
+                                    <TextBlock Text=" • " FontSize="12" Foreground="#2E7D32">
+                                        <Run Text="Свободно: "/>
+                                        <Run Text="{Binding AvailableSeats}"/>
+                                        <Run Text=" мест"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+
+                            <!-- Колонка 2: Цена -->
+                            <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                               
+                                <TextBlock Text="{Binding OldPrice, StringFormat={}{0:N0} ₽}" FontSize="13" Foreground="#888" TextDecorations="Strikethrough" HorizontalAlignment="Right"/>
+                                <TextBlock FontSize="22" HorizontalAlignment="Right" Text="{Binding Price, StringFormat={}{0:N0} ₽}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Foreground" Value="#1976D2"/>
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsExpensive}" Value="True">
+                                                    <Setter Property="Foreground" Value="#C62828"/>
+                                                    <Setter Property="FontWeight" Value="ExtraBold"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                                <TextBlock FontSize="12" Foreground="#E65100" FontWeight="SemiBold" HorizontalAlignment="Right" Text="{Binding DiscountText}"/>
+                                <TextBlock FontSize="12" Foreground="#888" Margin="0,4,0,0" HorizontalAlignment="Right" Text="{Binding TicketDescription}"/>
+                            </StackPanel>
+
+                            <!-- ⬇️ КОЛОНКА 3: КНОПКИ УПРАВЛЕНИЯ (Видны только если AdminControlsVisibility = Visible) ⬇️ -->
+                            <StackPanel Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                        Visibility="{Binding AdminControlsVisibility}">
+                                <Button Content=" Изменить" Click="EditFlight_Click" Tag="{Binding FlightId}" 
+                                        Background="Black" Foreground="White" Width="120" Height="30" Margin="0,0,0,5" FontSize="12"/>
+                                <Button Content=" Удалить" Click="DeleteFlight_Click" Tag="{Binding FlightId}" 
+                                        Background="Black" Foreground="White" Width="120" Height="30" FontSize="12"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="txtEmpty" Grid.Row="2" Text="Рейсы не найдены" FontSize="16" Foreground="#888"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0" Width="733">
+            <Button x:Name="btnBook" Content="Забронировать" Click="Book_Click" Background="#1976D2" Foreground="White" Width="140" Height="38" Margin="5" FontSize="14"/>
+            <Button x:Name="btnCart" Content="Мои брони" Click="Cart_Click" Width="140" Height="38" Margin="5" FontSize="14"/>
+            <Button x:Name="btnMyBookings" Content="Профиль" Click="Profile_Click"
+        Width="140" Height="38" Margin="5" FontSize="14"/>
+
+            <!-- Эта кнопка скрыта по умолчанию, C# код сделает её Visible для Админа/Менеджера -->
+            <Button x:Name="btnAddFlight" Content="➕ Добавить рейс" Click="AddFlight_Click" 
+                    Visibility="Collapsed" Background="#4CAF50" Foreground="White" Width="150" Height="35" Margin="5" FontSize="14"/>
+
+            <Button x:Name="btnExit" Content="Выход" Click="Exit_Click" Background="#EF5350" Foreground="White" Width="110" Height="38" Margin="5" FontSize="14"/>
+        </StackPanel>
+    </Grid>
+</Page>

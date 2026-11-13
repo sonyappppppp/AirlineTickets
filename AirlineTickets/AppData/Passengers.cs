@@ -28,8 +28,6 @@ namespace AirlineTickets.AppData
         public string Phone { get; set; }
         public string PassportSeries { get; set; }
         public string PassportNumber { get; set; }
-        public Nullable<System.DateTime> BirthDate { get; set; }
-        public string Gender { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bookings> Bookings { get; set; }

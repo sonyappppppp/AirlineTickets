@@ -125,8 +125,6 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="20" />
           <Property Name="PassportSeries" Type="nvarchar" MaxLength="10" />
           <Property Name="PassportNumber" Type="nvarchar" MaxLength="10" />
-          <Property Name="BirthDate" Type="date" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Payments">
           <Key>
@@ -153,12 +151,12 @@
           <Property Name="ClassName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="StatusId">
+        <EntityType Name="Status">
           <Key>
             <PropertyRef Name="StatusId" />
           </Key>
           <Property Name="StatusId" Type="int" Nullable="false" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -294,10 +292,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bookings_StatusId">
-          <End Role="StatusId" Type="Self.StatusId" Multiplicity="1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="StatusId">
+            <Principal Role="Status">
               <PropertyRef Name="StatusId" />
             </Principal>
             <Dependent Role="Bookings">
@@ -452,7 +450,7 @@
           <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SeatClasses" EntityType="Self.SeatClasses" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StatusId" EntityType="Self.StatusId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
@@ -489,7 +487,7 @@
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_StatusId" Association="Self.FK_Bookings_StatusId">
-            <End Role="StatusId" EntitySet="StatusId" />
+            <End Role="Status" EntitySet="Status" />
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Users" Association="Self.FK_Bookings_Users">
@@ -613,7 +611,7 @@
           <Property Name="StatusId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="BookingItems" Relationship="Self.FK_BookingItems_Bookings" FromRole="Bookings" ToRole="BookingItems" />
           <NavigationProperty Name="Passengers" Relationship="Self.FK_Bookings_Passengers" FromRole="Bookings" ToRole="Passengers" />
-          <NavigationProperty Name="StatusId1" Relationship="Self.FK_Bookings_StatusId" FromRole="Bookings" ToRole="StatusId" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Bookings_StatusId" FromRole="Bookings" ToRole="Status" />
           <NavigationProperty Name="Users" Relationship="Self.FK_Bookings_Users" FromRole="Bookings" ToRole="Users" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_Bookings" FromRole="Bookings" ToRole="Payments" />
         </EntityType>
@@ -692,8 +690,6 @@
           <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="PassportSeries" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="PassportNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDate" Type="DateTime" Precision="0" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_Passengers" FromRole="Passengers" ToRole="Bookings" />
         </EntityType>
         <EntityType Name="Payments">
@@ -725,13 +721,13 @@
           <NavigationProperty Name="FlightSeats" Relationship="Self.FK_FlightSeats_SeatClasses" FromRole="SeatClasses" ToRole="FlightSeats" />
           <NavigationProperty Name="Tickets" Relationship="Self.FK_Tickets_SeatClasses" FromRole="SeatClasses" ToRole="Tickets" />
         </EntityType>
-        <EntityType Name="StatusId">
+        <EntityType Name="Status">
           <Key>
-            <PropertyRef Name="StatusId1" />
+            <PropertyRef Name="StatusId" />
           </Key>
-          <Property Name="StatusId1" Type="Int32" Nullable="false" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_StatusId" FromRole="StatusId" ToRole="Bookings" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bookings" Relationship="Self.FK_Bookings_StatusId" FromRole="Status" ToRole="Bookings" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -919,11 +915,11 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Bookings_StatusId">
-          <End Role="StatusId" Type="Self.StatusId" Multiplicity="1" />
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
           <End Role="Bookings" Type="Self.Bookings" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="StatusId">
-              <PropertyRef Name="StatusId1" />
+            <Principal Role="Status">
+              <PropertyRef Name="StatusId" />
             </Principal>
             <Dependent Role="Bookings">
               <PropertyRef Name="StatusId" />
@@ -1014,7 +1010,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="AirlineTicketOfEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="AirlineTicketOfEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Aircrafts" EntityType="Self.Aircrafts" />
           <EntitySet Name="Airlines" EntityType="Self.Airlines" />
           <EntitySet Name="Airports" EntityType="Self.Airports" />
@@ -1029,7 +1025,7 @@
           <EntitySet Name="Payments" EntityType="Self.Payments" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="SeatClasses" EntityType="Self.SeatClasses" />
-          <EntitySet Name="StatusId" EntityType="Self.StatusId" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Tickets" EntityType="Self.Tickets" />
           <EntitySet Name="Users" EntityType="Self.Users" />
@@ -1082,7 +1078,7 @@
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_StatusId" Association="Self.FK_Bookings_StatusId">
-            <End Role="StatusId" EntitySet="StatusId" />
+            <End Role="Status" EntitySet="Status" />
             <End Role="Bookings" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_Bookings_Users" Association="Self.FK_Bookings_Users">
@@ -1119,7 +1115,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище AirlineTicketOfModelContainer" CdmEntityContainer="AirlineTicketOfEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AirlineTicketOfModelContainer" CdmEntityContainer="AirlineTicketOfEntities2">
           <EntitySetMapping Name="Aircrafts">
             <EntityTypeMapping TypeName="AirlineTicketOfModel.Aircrafts">
               <MappingFragment StoreEntitySet="Aircrafts">
@@ -1249,8 +1245,6 @@
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="PassportSeries" ColumnName="PassportSeries" />
                 <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1282,11 +1276,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="StatusId">
-            <EntityTypeMapping TypeName="AirlineTicketOfModel.StatusId">
-              <MappingFragment StoreEntitySet="StatusId">
-                <ScalarProperty Name="StatusId1" ColumnName="StatusId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="AirlineTicketOfModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

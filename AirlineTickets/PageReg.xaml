@@ -3,49 +3,87 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:AirlineTickets"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="PageReg">
+      d:DesignHeight="600" d:DesignWidth="400"
+      Title="Регистрация">
+    <Viewbox Stretch="Uniform" StretchDirection="Both" Margin="-45,0,-64,0">
+        <Grid Width="461" Height="776" VerticalAlignment="Center" HorizontalAlignment="Left">
+            <Grid.Background>
+                <ImageBrush ImageSource="/av.jpg"/>
+            </Grid.Background>
 
-    <Grid HorizontalAlignment="Center">
-        <Grid.Background>
-            <ImageBrush ImageSource="/av.jpg"/>
-        </Grid.Background>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="62*"/>
+                <RowDefinition Height="693*"/>
+                <RowDefinition Height="21*"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock Text="Регистрация" FontSize="22" FontWeight="Bold"
-                   HorizontalAlignment="Center" Margin="0,0,0,15"/>
-        <TextBox x:Name="txtname" HorizontalAlignment="Left" Margin="102,13,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Background="Black" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="70" Foreground="Black" FontSize="18" FontWeight="Bold" FontFamily="Wide Latin"><Run Language="ru-ru" Text="И"/><Run Text="мя"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Margin="10,46,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="113" Text="Фамилия" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,79,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Height="19" Width="98" Text="Отчество" FontSize="18" FontWeight="Bold"/>
-        <TextBox x:Name="txtsurn" HorizontalAlignment="Left" Margin="102,52,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="18" Background="Black" Foreground="White"/>
-        <TextBox x:Name="txtpatr" HorizontalAlignment="Left" Margin="102,87,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Height="16" Background="Black" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,113,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Логин" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="7,151,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Почта" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="7,183,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Телефон" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,220,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Пароль" VerticalAlignment="Top" FontSize="18" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,252,0,0" Grid.Row="8" TextWrapping="Wrap" Text="Повторите пароль" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Width="89"/>
-        <TextBox x:Name="txtemail" HorizontalAlignment="Left" Margin="102,157,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="Black" Foreground="#FFFBFAFA"/>
-        <TextBox x:Name="txtlog" HorizontalAlignment="Left" Margin="102,119,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FF0A0A0A" Foreground="#FFEFEFEF"/>
-        <TextBox x:Name="txtphon" HorizontalAlignment="Left" Margin="102,189,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
-        <PasswordBox x:Name="passw" HorizontalAlignment="Left" Margin="102,226,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
-        <PasswordBox x:Name="passwcheck" HorizontalAlignment="Left" Margin="102,263,0,0" Grid.Row="8" VerticalAlignment="Top" Width="120" Background="#FF131313" Foreground="White"/>
-        <Button x:Name="btnreg" Content="Зарегистрироваться" HorizontalAlignment="Center" Margin="0,327,0,0" Grid.Row="8" VerticalAlignment="Top" Height="28" Width="227"  Background="Black" Foreground="White" Click="btnreg_Click"/>
+            <TextBlock Text="Регистрация" FontSize="24" FontWeight="Bold" Foreground="White"
+                       HorizontalAlignment="Center" Margin="0,10,0,20" Grid.Row="0"/>
 
+            <Grid Grid.Row="1" Margin="10,0,10,0" Grid.RowSpan="2">
+                <!-- Имя -->
+                <TextBlock Text="Имя" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,0,4"/>
+                <TextBox x:Name="txtname" Height="28" Margin="0,24,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         TextChanged="Field_TextChanged"/>
+                <TextBlock x:Name="errName" Foreground="#FF6666" FontSize="10" Margin="0,56,0,0" Visibility="Collapsed"/>
 
+                <!-- Фамилия -->
+                <TextBlock Text="Фамилия" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,80,0,4"/>
+                <TextBox x:Name="txtsurn" Height="28" Margin="0,104,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         TextChanged="Field_TextChanged"/>
+                <TextBlock x:Name="errSurn" Foreground="#FF6666" FontSize="10" Margin="0,136,0,0" Visibility="Collapsed"/>
 
-    </Grid>
+                <!-- Отчество (необязательное) -->
+                <TextBlock Text="Отчество" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,160,0,4"/>
+                <TextBox x:Name="txtpatr" Height="28" Margin="0,184,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         TextChanged="Field_TextChanged"/>
+                <TextBlock x:Name="errPatr" Foreground="#FF6666" FontSize="10" Margin="0,216,0,0" Visibility="Collapsed"/>
+
+                <!-- Логин -->
+                <TextBlock Text="Логин" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,240,0,4"/>
+                <TextBox x:Name="txtlog" Height="28" Margin="0,264,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         TextChanged="Field_TextChanged"/>
+                <TextBlock x:Name="errLog" Foreground="#FF6666" FontSize="10" Margin="0,296,0,0" Visibility="Collapsed"/>
+
+                <!-- Почта -->
+                <TextBlock Text="Почта" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,320,0,4"/>
+                <TextBox x:Name="txtemail" Height="28" Margin="0,344,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         TextChanged="Field_TextChanged"/>
+                <TextBlock x:Name="errEmail" Foreground="#FF6666" FontSize="10" Margin="0,376,0,0" Visibility="Collapsed"/>
+
+                <!-- Телефон -->
+                <TextBlock Text="Телефон" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,400,0,4"/>
+                <TextBox x:Name="txtphon" Height="28" Margin="0,424,0,0" VerticalAlignment="Top" 
+                         Background="#FF131313" Foreground="White" BorderThickness="1"
+                         PreviewTextInput="NumberOnly_PreviewTextInput" TextChanged="Phone_TextChanged"/>
+                <TextBlock x:Name="errPhone" Foreground="#FF6666" FontSize="10" Margin="0,456,0,0" Visibility="Collapsed"/>
+
+                <!-- Пароль -->
+                <TextBlock Text="Пароль" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,480,0,4"/>
+                <PasswordBox x:Name="passw" Height="28" Margin="0,504,0,0" VerticalAlignment="Top" 
+                             Background="#FF131313" Foreground="White" BorderThickness="1"
+                             PasswordChanged="Password_TextChanged"/>
+                <TextBlock x:Name="errPass" Foreground="#FF6666" FontSize="10" Margin="0,536,0,0" Visibility="Collapsed"/>
+
+                <!-- Повтор пароля -->
+                <TextBlock Text="Повторите пароль" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,560,0,4"/>
+                <PasswordBox x:Name="passwcheck" Height="28" Margin="0,584,0,0" VerticalAlignment="Top" 
+                             Background="#FF131313" Foreground="White" BorderThickness="1"
+                             PasswordChanged="Password_TextChanged"/>
+                <TextBlock x:Name="errPassCheck" Foreground="#FF6666" FontSize="10" Margin="0,616,0,0" Visibility="Collapsed"/>
+
+                <!-- Кнопка -->
+                <Button x:Name="btnreg" Content="Зарегистрироваться" 
+                        Margin="0,660,0,0" VerticalAlignment="Top" Height="36" 
+                        Background="#FF1E88E5" Foreground="White" FontWeight="Bold" FontSize="16"
+                        IsEnabled="False" Click="btnreg_Click"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
 </Page>

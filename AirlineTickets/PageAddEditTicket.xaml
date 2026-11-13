@@ -1,0 +1,72 @@
+﻿<Page x:Class="AirlineTickets.PageAddEditTicket"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Управление рейсом">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+        <StackPanel MaxWidth="600" HorizontalAlignment="Center">
+            <TextBlock x:Name="txtTitle" Text="Добавить новый рейс" FontSize="24" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+
+            <Border Background="White" BorderBrush="#BBDEFB" BorderThickness="1" CornerRadius="8" Padding="20">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- Номер рейса -->
+                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Номер рейса (напр. SU-1050)" Margin="0,0,0,4"/>
+                            <TextBox x:Name="txtFlightNumber" Height="32"/>
+                        </StackPanel>
+
+                        <!-- Авиакомпания -->
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,12">
+                            <TextBlock Text="Авиакомпания" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="cmbAirline" Height="32" DisplayMemberPath="AirlineName" SelectedValuePath="Id"/>
+                        </StackPanel>
+
+                        <!-- Аэропорт вылета -->
+                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Аэропорт вылета" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="cmbDepAirport" Height="32" DisplayMemberPath="AirportName" SelectedValuePath="Id"/>
+                        </StackPanel>
+
+                        <!-- Аэропорт прилета -->
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,12">
+                            <TextBlock Text="Аэропорт прилета" Margin="0,0,0,4"/>
+                            <ComboBox x:Name="cmbArrAirport" Height="32" DisplayMemberPath="AirportName" SelectedValuePath="Id"/>
+                        </StackPanel>
+
+                        <!-- Время вылета -->
+                        <StackPanel Grid.Row="2" Grid.Column="0" Margin="0,0,0,12">
+                            <TextBlock Text="Дата и время вылета" Margin="0,0,0,4"/>
+                            <DatePicker x:Name="dpDepDate" Height="32"/>
+                            <TextBox x:Name="txtDepTime" Height="32" Margin="0,4,0,0" Text="12:00" ToolTip="Формат ЧЧ:ММ"/>
+                        </StackPanel>
+
+                        <!-- Длительность и Цена -->
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0,0,0,12">
+                            <TextBlock Text="Длительность (в минутах)" Margin="0,0,0,4"/>
+                            <TextBox x:Name="txtDuration" Height="32" PreviewTextInput="NumberOnly_PreviewTextInput"/>
+                            <TextBlock Text="Базовая цена (₽)" Margin="0,8,0,4"/>
+                            <TextBox x:Name="txtPrice" Height="32" PreviewTextInput="NumberOnly_PreviewTextInput"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                        <Button Content="Отмена" Click="Cancel_Click" Width="120" Height="36" Margin="0,0,12,0"/>
+                        <Button x:Name="btnSave" Content="Сохранить" Click="Save_Click" Background="#4CAF50" Foreground="White" Width="150" Height="36" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

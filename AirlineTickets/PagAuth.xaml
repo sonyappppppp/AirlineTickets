@@ -8,19 +8,120 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="PagAuth">
 
-    <Grid Background="#FFBF6D6D">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Left" Margin="317,10,0,0" TextWrapping="Wrap" Text="Авторизация" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" TextAlignment="Center" Grid.RowSpan="9"/>
-    </Grid>
+
+    <Viewbox Stretch="Uniform" StretchDirection="Both">
+        <Grid Width="450" Height="600">
+            <Grid.Background>
+                <ImageBrush ImageSource="/av.jpg"/>
+            </Grid.Background>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Заголовок -->
+            <TextBlock Grid.Row="1" Grid.Column="1" 
+                       Text="Авторизация" 
+                       FontSize="28" FontWeight="Bold"
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,25" 
+                       Foreground="#333"/>
+
+            <!-- Логин -->
+            <TextBlock Grid.Row="2" Grid.Column="1" 
+                       Text="Логин" 
+                       FontWeight="Bold" 
+                       Margin="0,0,0,5" FontSize="18"/>
+
+            <TextBox x:Name="txtLogin" 
+                     Grid.Row="3" Grid.Column="1" 
+                     Padding="10,8" 
+                     FontSize="14"
+                     TextChanged="TxtLogin_TextChanged"/>
+
+            <TextBlock x:Name="errLogin" 
+                       Grid.Row="3" Grid.Column="1" 
+                       Foreground="#D32F2F" 
+                       FontSize="11" 
+                       Margin="0,32,0,0" 
+                       Visibility="Collapsed"/>
+
+            <!-- Пароль -->
+            <TextBlock Grid.Row="4" Grid.Column="1" 
+                       Text="Пароль" 
+                       FontWeight="Bold" 
+                       Margin="0,15,0,5" FontSize="18"/>
+
+            <PasswordBox x:Name="passPassword" 
+                         Grid.Row="5" Grid.Column="1" 
+                         Padding="10,8" 
+                         FontSize="14"
+                         PasswordChanged="PassPassword_PasswordChanged"/>
+
+            <TextBlock x:Name="errPassword" 
+                       Grid.Row="5" Grid.Column="1" 
+                       Foreground="#D32F2F" 
+                       FontSize="11" 
+                       Margin="0,32,0,0" 
+                       Visibility="Collapsed"/>
+
+            <!-- Повтор пароля -->
+            <TextBlock Grid.Row="6" Grid.Column="1" 
+                       Text="Повторите пароль" 
+                       FontWeight="Bold" 
+                       Margin="0,15,0,5" FontSize="18"/>
+
+            <PasswordBox x:Name="passRepeat" 
+                         Grid.Row="7" Grid.Column="1" 
+                         Padding="10,8" 
+                         FontSize="14"
+                         PasswordChanged="PassRepeat_PasswordChanged"/>
+
+            <TextBlock x:Name="errRepeat" 
+                       Grid.Row="7" Grid.Column="1" 
+                       Foreground="#D32F2F" 
+                       FontSize="11" 
+                       Margin="0,32,0,0" 
+                       Visibility="Collapsed"/>
+
+            <!-- Кнопка входа -->
+            <Button x:Name="btnAuth" 
+                    Grid.Row="8" Grid.Column="1" 
+                    Content="Войти" 
+                    Height="45" 
+                    FontSize="16"
+                    Click="BtnAuth_Click" 
+                    Background="#1976D2" 
+                    Foreground="#FF212121" 
+                    BorderThickness="0" 
+                    IsEnabled="False" 
+                    Margin="0,25,0,0"/>
+
+            <!-- Ссылка на регистрацию -->
+            <TextBlock Grid.Row="9" Grid.Column="1" 
+                       HorizontalAlignment="Left" 
+                       Margin="37,20,0,0" FontWeight="Bold" Width="284" Grid.ColumnSpan="2">
+                <Run Text="Нет аккаунта? " FontSize="13" Background="white"/>
+                <Hyperlink Click="HyperlinkRegister_Click" FontSize="13" Background="White">
+                    Зарегистрироваться
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+    </Viewbox>
 </Page>

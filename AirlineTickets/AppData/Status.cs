@@ -12,16 +12,16 @@ namespace AirlineTickets.AppData
     using System;
     using System.Collections.Generic;
     
-    public partial class StatusId
+    public partial class Status
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StatusId()
+        public Status()
         {
             this.Bookings = new HashSet<Bookings>();
         }
     
-        public int StatusId1 { get; set; }
-        public string Status { get; set; }
+        public int StatusId { get; set; }
+        public string StatusName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Bookings> Bookings { get; set; }

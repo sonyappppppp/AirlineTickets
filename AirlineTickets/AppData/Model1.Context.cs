@@ -13,10 +13,10 @@ namespace AirlineTickets.AppData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AirlineTicketOfEntities : DbContext
+    public partial class AirlineTicketOfEntities2 : DbContext
     {
-        public AirlineTicketOfEntities()
-            : base("name=AirlineTicketOfEntities")
+        public AirlineTicketOfEntities2()
+            : base("name=AirlineTicketOfEntities2")
         {
         }
     
@@ -39,7 +39,7 @@ namespace AirlineTickets.AppData
         public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<SeatClasses> SeatClasses { get; set; }
-        public virtual DbSet<StatusId> StatusId { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tickets> Tickets { get; set; }
         public virtual DbSet<Users> Users { get; set; }

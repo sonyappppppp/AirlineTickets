@@ -33,7 +33,7 @@ namespace AirlineTickets.AppData
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookingItems> BookingItems { get; set; }
         public virtual Passengers Passengers { get; set; }
-        public virtual StatusId StatusId1 { get; set; }
+        public virtual Status Status { get; set; }
         public virtual Users Users { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payments> Payments { get; set; }
