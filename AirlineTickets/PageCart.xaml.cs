@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -198,40 +199,70 @@ namespace AirlineTickets
         // ============================================================
         private void Checkout_Click(object sender, RoutedEventArgs e)
         {
-            if (AppConnect.u == null) return;
-            if (_cart == null || _cart.Count == 0)
+         
+
+            // ... внутри вашего метода обработки кнопки (например, BtnBook_Click)
+
+            if (AppConnect.u == null)
             {
-                MessageBox.Show("Корзина пуста.", "Внимание",
-                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Пользователь не авторизован.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            if (!IsFormValid())
+
+            if (_cart == null || _cart.Count == 0)
             {
-                // ФИО: только буквы, мин. 3 символа
-                bool fioOk = System.Text.RegularExpressions.Regex.IsMatch(txtFullName.Text.Trim(), @"^[A-Za-zА-Яа-яЁё\s\-]{3,}$");
-                errFio.Visibility = fioOk ? Visibility.Collapsed : Visibility.Visible;
-
-                // Телефон: ровно 11 цифр, начинается с 7 или 8
-                string phoneDigits = new string(txtPhone.Text.Where(char.IsDigit).ToArray());
-                bool phoneOk = phoneDigits.Length == 11 && (phoneDigits.StartsWith("7") || phoneDigits.StartsWith("8"));
-                errPhone.Visibility = phoneOk ? Visibility.Collapsed : Visibility.Visible;
-
-                // Серия: ровно 4 цифры
-                bool seriesOk = System.Text.RegularExpressions.Regex.IsMatch(txtPassportSeries.Text, @"^\d{4}$");
-                errSeries.Visibility = seriesOk ? Visibility.Collapsed : Visibility.Visible;
-
-                // Номер: ровно 6 цифр
-                bool numberOk = System.Text.RegularExpressions.Regex.IsMatch(txtPassportNumber.Text, @"^\d{6}$");
-                errNumber.Visibility = numberOk ? Visibility.Collapsed : Visibility.Visible;
-
-                // Email: базовая проверка
-                bool emailOk = false;
-                try { var addr = new System.Net.Mail.MailAddress(txtEmail.Text.Trim()); emailOk = addr.Address == txtEmail.Text.Trim(); } catch { }
-                errEmail.Visibility = emailOk ? Visibility.Collapsed : Visibility.Visible;
-
-                // Если у тебя есть кнопка оформления (btnCheckout), раскомментируй строку ниже:
-                // btnCheckout.IsEnabled = fioOk && phoneOk && seriesOk && numberOk && emailOk;
+                MessageBox.Show("Корзина пуста.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
+
+            // 1. Создаем список для сбора всех ошибок
+            List<string> errors = new List<string>();
+
+            // 2. Проверяем ФИО
+            string fio = txtFullName.Text.Trim();
+            bool fioOk = Regex.IsMatch(fio, @"^[A-Za-zА-Яа-яЁё\s\-]{3,}$");
+            errFio.Visibility = fioOk ? Visibility.Collapsed : Visibility.Visible;
+            if (!fioOk) errors.Add("• ФИО: минимум 3 буквы, только буквы, пробелы и дефис.");
+
+            // 3. Проверяем Телефон
+            string phoneDigits = new string(txtPhone.Text.Where(char.IsDigit).ToArray());
+            bool phoneOk = phoneDigits.Length == 11 && (phoneDigits.StartsWith("7") || phoneDigits.StartsWith("8"));
+            errPhone.Visibility = phoneOk ? Visibility.Collapsed : Visibility.Visible;
+            if (!phoneOk) errors.Add("• Телефон: должен содержать ровно 11 цифр и начинаться с 7 или 8.");
+
+            // 4. Проверяем Серию паспорта
+            bool seriesOk = Regex.IsMatch(txtPassportSeries.Text.Trim(), @"^\d{4}$");
+            errSeries.Visibility = seriesOk ? Visibility.Collapsed : Visibility.Visible;
+            if (!seriesOk) errors.Add("• Серия паспорта: должна состоять ровно из 4 цифр.");
+
+            // 5. Проверяем Номер паспорта
+            bool numberOk = Regex.IsMatch(txtPassportNumber.Text.Trim(), @"^\d{6}$");
+            errNumber.Visibility = numberOk ? Visibility.Collapsed : Visibility.Visible;
+            if (!numberOk) errors.Add("• Номер паспорта: должен состоять ровно из 6 цифр.");
+
+            // 6. Проверяем Email
+            bool emailOk = false;
+            string email = txtEmail.Text.Trim();
+            try
+            {
+                var addr = new MailAddress(email);
+                emailOk = addr.Address == email; // Проверка на корректность формата
+            }
+            catch
+            {
+                emailOk = false;
+            }
+            errEmail.Visibility = emailOk ? Visibility.Collapsed : Visibility.Visible;
+            if (!emailOk) errors.Add("• Email: введен некорректный формат адреса.");
+
+            // 7. Если есть ошибки, показываем их все сразу и прерываем выполнение
+            if (errors.Count > 0)
+            {
+                string errorMessage = "Пожалуйста, исправьте следующие ошибки:\n\n" + string.Join("\n", errors);
+                MessageBox.Show(errorMessage, "Ошибка валидации данных", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return; // Прерываем метод, бронирование не продолжается
+            }
+
 
             try
             {
@@ -361,6 +392,11 @@ namespace AirlineTickets
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new PageTicket());
+        }
+
+        private void listCart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 

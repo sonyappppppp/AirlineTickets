@@ -53,7 +53,7 @@
                      Grid.Row="3" Grid.Column="1" 
                      Padding="10,8" 
                      FontSize="14"
-                     TextChanged="TxtLogin_TextChanged"/>
+                     TextChanged="TxtLogin_TextChanged" MaxLength="30"/>
 
             <TextBlock x:Name="errLogin" 
                        Grid.Row="3" Grid.Column="1" 
@@ -72,7 +72,7 @@
                          Grid.Row="5" Grid.Column="1" 
                          Padding="10,8" 
                          FontSize="14"
-                         PasswordChanged="PassPassword_PasswordChanged"/>
+                         PasswordChanged="PassPassword_PasswordChanged" MaxLength="30"/>
 
             <TextBlock x:Name="errPassword" 
                        Grid.Row="5" Grid.Column="1" 
@@ -91,7 +91,7 @@
                          Grid.Row="7" Grid.Column="1" 
                          Padding="10,8" 
                          FontSize="14"
-                         PasswordChanged="PassRepeat_PasswordChanged"/>
+                         PasswordChanged="PassRepeat_PasswordChanged" MaxLength="30"/>
 
             <TextBlock x:Name="errRepeat" 
                        Grid.Row="7" Grid.Column="1" 

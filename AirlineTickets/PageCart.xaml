@@ -22,7 +22,7 @@
                        FontSize="22" FontWeight="Bold" Foreground="#1565C0" Margin="0,0,0,12"/>
 
             <ListView x:Name="listCart" Grid.Row="1" MinHeight="80" MaxHeight="280"
-                      BorderBrush="#BBDEFB" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                      BorderBrush="#BBDEFB" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="listCart_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Background="White" BorderBrush="#1976D2" BorderThickness="1"
@@ -111,7 +111,7 @@
 
                     <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,8">
                         <TextBlock Text="ФИО (фамилия и имя)" Margin="0,0,0,4"/>
-                        <TextBox x:Name="txtFullName" Height="28" TextChanged="Field_TextChanged"/>
+                        <TextBox x:Name="txtFullName" Height="28" TextChanged="Field_TextChanged" MaxLength="60"/>
                         <TextBlock x:Name="errFio" Text="Минимум 3 буквы" Foreground="Red" FontSize="11" Visibility="Collapsed"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,8">
@@ -133,7 +133,7 @@
 
                     <StackPanel Grid.Row="3" Grid.Column="0">
                         <TextBlock Text="Email" Margin="0,0,0,4"/>
-                        <TextBox x:Name="txtEmail" Height="28" TextChanged="Field_TextChanged"/>
+                        <TextBox x:Name="txtEmail" Height="28" TextChanged="Field_TextChanged" MaxLength="30"/>
                         <TextBlock x:Name="errEmail" Text="Некорректный email" Foreground="Red" FontSize="11" Visibility="Collapsed"/>
                     </StackPanel>
                     <StackPanel Grid.Row="3" Grid.Column="2">

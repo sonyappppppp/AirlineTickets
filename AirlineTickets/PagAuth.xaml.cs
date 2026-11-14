@@ -125,41 +125,40 @@ namespace AirlineTickets
             // Кнопка "Войти"
             private void BtnAuth_Click(object sender, RoutedEventArgs e)
             {
-                try
+          
+            try
+            {
+                string login = txtLogin.Text.Trim();
+                string password = passPassword.Password;
+
+                var user = AppConnect.model01.Users
+                    .FirstOrDefault(u => u.Login == login && u.Password == password);
+
+                if (user != null)
                 {
-                    string login = txtLogin.Text.Trim();
-                    string password = passPassword.Password;
+                    // Сохраняем пользователя ДО навигации
+                    AppConnect.u = user;
 
-                    var user = AppConnect.model01.Users
-                        .FirstOrDefault(u => u.Login == login && u.Password == password);
-
-                    if (user != null)
-                    {
-                        MessageBox.Show($"Добро пожаловать, {user.FirstName}!", "Успех",
-                                        MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Добро пожаловать, {user.FirstName}!", "Успех",
+                                    MessageBoxButton.OK, MessageBoxImage.Information);
 
                     NavigationService.Navigate(new PageTicket());
-                    }
-                    else
-                    {
-                        SetError(txtLogin, errLogin, "Неверный логин или пароль");
-                        SetError(passPassword, errPassword, "Неверный логин или пароль");
-                        txtLogin.Focus();
-                    }
-                AppConnect.u = user;
-
-               
-                    NavigationService.Navigate(new PageTicket());
-                
-                  
-            }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
-                                    MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-           
+                else
+                {
+                    SetError(txtLogin, errLogin, "Неверный логин или пароль");
+                    SetError(passPassword, errPassword, "Неверный логин или пароль");
+                    txtLogin.Focus();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка",
+                                MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
+           
+        
 
             // Ссылка на регистрацию
             private void HyperlinkRegister_Click(object sender, RoutedEventArgs e)

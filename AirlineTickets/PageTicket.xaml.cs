@@ -170,19 +170,60 @@ namespace AirlineTickets
         // ============================================================
         private void Book_Click(object sender, RoutedEventArgs e)
         {
-            int roleId = AppConnect.u?.RoleId ?? ROLE_GUEST;
-            if (roleId == ROLE_GUEST)
-            {
-                MessageBox.Show("Для бронирования необходимо войти в систему.", "Требуется авторизация", MessageBoxButton.OK, MessageBoxImage.Warning);
-                NavigationService.Navigate(new PagAuth());
-                return;
-            }
+            // 1. Получаем выбранную карточку рейса
+            var selectedCard = listFlights.SelectedItem as FlightCard;
 
-            if (listFlights.SelectedItem == null)
+            if (selectedCard == null)
             {
                 MessageBox.Show("Сначала выберите рейс в списке.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
+
+            // 2. Инициализируем корзину, если она вдруг null
+            if (AppConnect.Cart == null)
+            {
+                AppConnect.Cart = new List<CartItem>();
+            }
+
+            // 3. Проверяем, есть ли уже этот рейс в корзине
+            var existingItem = AppConnect.Cart.FirstOrDefault(c => c.Offer.FlightId == selectedCard.FlightId);
+
+            if (existingItem != null)
+            {
+                // Если есть, увеличиваем количество мест
+                existingItem.Quantity++;
+                MessageBox.Show($"Количество мест на рейс {selectedCard.FlightNumber} увеличено.", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                // 4. Если нет, создаем новый элемент корзины, преобразуя данные
+                var newItem = new CartItem
+                {
+                    Offer = new FlightOffer
+                    {
+                        FlightId = selectedCard.FlightId,
+                        AirlineName = selectedCard.AirlineName,
+                        FlightNumber = selectedCard.FlightNumber,
+                        DepartureCity = selectedCard.DepartureCity,
+                        DepartureIATA = selectedCard.DepartureIATA,
+                        DepartureTime = selectedCard.DepartureTime,
+                        ArrivalCity = selectedCard.ArrivalCity,
+                        ArrivalIATA = selectedCard.ArrivalIATA,
+                        ArrivalTime = selectedCard.ArrivalTime,
+                        DurationText = selectedCard.DurationText,
+                        Price = selectedCard.Price,
+                        AvailableSeats = selectedCard.AvailableSeats,
+                        SeatClassId = 1, // По умолчанию Эконом (можно доработать при выборе класса)
+                        TicketDescription = selectedCard.TicketDescription
+                    },
+                    Quantity = 1
+                };
+
+                AppConnect.Cart.Add(newItem);
+                MessageBox.Show($"Рейс {selectedCard.FlightNumber} добавлен в корзину!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            // 5. Только после добавления переходим на страницу корзины
             NavigationService.Navigate(new PageCart());
         }
 

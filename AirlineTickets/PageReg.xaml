@@ -26,21 +26,21 @@
                 <TextBlock Text="Имя" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,0,0,4"/>
                 <TextBox x:Name="txtname" Height="28" Margin="0,24,0,0" VerticalAlignment="Top" 
                          Background="#FF131313" Foreground="White" BorderThickness="1"
-                         TextChanged="Field_TextChanged"/>
+                         TextChanged="Field_TextChanged" MaxLength="30"/>
                 <TextBlock x:Name="errName" Foreground="#FF6666" FontSize="10" Margin="0,56,0,0" Visibility="Collapsed"/>
 
                 <!-- Фамилия -->
                 <TextBlock Text="Фамилия" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,80,0,4"/>
                 <TextBox x:Name="txtsurn" Height="28" Margin="0,104,0,0" VerticalAlignment="Top" 
                          Background="#FF131313" Foreground="White" BorderThickness="1"
-                         TextChanged="Field_TextChanged"/>
+                         TextChanged="Field_TextChanged" MaxLength="30"/>
                 <TextBlock x:Name="errSurn" Foreground="#FF6666" FontSize="10" Margin="0,136,0,0" Visibility="Collapsed"/>
 
                 <!-- Отчество (необязательное) -->
                 <TextBlock Text="Отчество" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,160,0,4"/>
                 <TextBox x:Name="txtpatr" Height="28" Margin="0,184,0,0" VerticalAlignment="Top" 
                          Background="#FF131313" Foreground="White" BorderThickness="1"
-                         TextChanged="Field_TextChanged"/>
+                         TextChanged="Field_TextChanged" MaxLength="30"/>
                 <TextBlock x:Name="errPatr" Foreground="#FF6666" FontSize="10" Margin="0,216,0,0" Visibility="Collapsed"/>
 
                 <!-- Логин -->
@@ -54,8 +54,8 @@
                 <TextBlock Text="Почта" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,320,0,4"/>
                 <TextBox x:Name="txtemail" Height="28" Margin="0,344,0,0" VerticalAlignment="Top" 
                          Background="#FF131313" Foreground="White" BorderThickness="1"
-                         TextChanged="Field_TextChanged"/>
-                <TextBlock x:Name="errEmail" Foreground="#FF6666" FontSize="10" Margin="0,376,0,0" Visibility="Collapsed"/>
+                         TextChanged="Field_TextChanged" MaxLength="30"/>
+                <TextBlock x:Name="errEmail" Foreground="#FF6666" FontSize="10" Margin="0,376,0,0" Visibility="Collapsed" />
 
                 <!-- Телефон -->
                 <TextBlock Text="Телефон" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,400,0,4"/>
@@ -68,14 +68,14 @@
                 <TextBlock Text="Пароль" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,480,0,4"/>
                 <PasswordBox x:Name="passw" Height="28" Margin="0,504,0,0" VerticalAlignment="Top" 
                              Background="#FF131313" Foreground="White" BorderThickness="1"
-                             PasswordChanged="Password_TextChanged"/>
+                             PasswordChanged="Password_TextChanged" MaxLength="30"/>
                 <TextBlock x:Name="errPass" Foreground="#FF6666" FontSize="10" Margin="0,536,0,0" Visibility="Collapsed"/>
 
                 <!-- Повтор пароля -->
                 <TextBlock Text="Повторите пароль" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0,560,0,4"/>
                 <PasswordBox x:Name="passwcheck" Height="28" Margin="0,584,0,0" VerticalAlignment="Top" 
                              Background="#FF131313" Foreground="White" BorderThickness="1"
-                             PasswordChanged="Password_TextChanged"/>
+                             PasswordChanged="Password_TextChanged" MaxLength="30"/>
                 <TextBlock x:Name="errPassCheck" Foreground="#FF6666" FontSize="10" Margin="0,616,0,0" Visibility="Collapsed"/>
 
                 <!-- Кнопка -->
